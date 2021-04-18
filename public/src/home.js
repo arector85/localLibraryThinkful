@@ -11,10 +11,14 @@ function getTotalAccountsCount(accounts) {
 function getBooksBorrowedCount(books) {
   return books.filter((book) => book.borrows.find((borrow) => !borrow.returned)).length;
 }
-//helper function for most common genre, pop book and pop author:
+
+
+//HELPER FUNCTION for most common genre, pop book and pop author:
 function topFiveSort(array) {
   return array.sort((a, b) => a.count < b.count ? 1 : -1).slice(0, 5);
 }
+
+
 function getMostCommonGenres(books) {
   // loop throuh books and look at genres, return most popular genres in descending order of count with max amount of 5 objects
   //{...name of genre, ...total count of genre}
@@ -37,6 +41,7 @@ for (let genre in genreList) {
   const count = genreList[genre];
   completeList.push({name: `${genre}`, count: count});
 }
+  
 //use helper function to sort and return top five only
 return topFiveSort(completeList);
  
@@ -45,6 +50,8 @@ return topFiveSort(completeList);
 function getMostPopularBooks(books) {
   let result = [];
   books.forEach((book) => result.push({name: book.title, count: book.borrows.length}))
+  
+  //use helper function:
   return topFiveSort(result);
 }
 
@@ -63,6 +70,8 @@ function getMostPopularAuthors(books, authors) {
    const authorObj = { name: authorName, count: count};
    authorArray.push(authorObj);
  }
+  
+  //use helper function
  return topFiveSort(authorArray);
 }
 
